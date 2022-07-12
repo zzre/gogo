@@ -1,0 +1,64 @@
+<html>
+    <head>
+        <style>
+            #wrap {
+                display: grid;
+                place-items: center;
+                padding: 20%;
+            }
+
+            progress {
+                width: 0;
+                min-width: 100%;
+                -webkit-appearance: none;
+            }
+
+            ::-webkit-progress-bar {
+                background-color: rgb(233, 233, 233);
+            }
+
+            ::-webkit-progress-value {
+                background-color: rgb(41, 210, 109);
+            }
+
+            #timer {
+                text-align: center;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="wrap">
+            <progress id="progress"></progress>
+            <h2 id="timer"></h2>
+        </div>
+        <script>
+            function setTimer() {
+                const now = new Date();
+                const start = new Date("2022-07-18");
+                const dday = new Date("2024-01-17");
+                var remain = (dday / 1000) - parseInt(now / 1000); // 초
+
+                const progress = document.querySelector("#progress");
+                const max = (dday / 1000) - (start / 1000);
+                progress.max = max;
+                progress.value = (max - remain);
+                progress.min = "0";
+
+                const _sec = remain % 60;
+                remain = parseInt(remain / 60); // 분
+
+                const _min = remain % 60;
+                remain = parseInt(remain / 60); // 시
+
+                const _hour = remain % 24;
+                remain = parseInt(remain / 24); // 일
+
+                const _day = remain;
+                document.querySelector("#timer").innerHTML = _day + "일 " + _hour + "시간 " + _min + "분 " + _sec + "초";
+                
+            }
+
+            setInterval(setTimer, 1000);
+        </script>
+    </body>
+</html>
